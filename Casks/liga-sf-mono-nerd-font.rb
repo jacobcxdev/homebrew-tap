@@ -10,5 +10,5 @@ cask "liga-sf-mono-nerd-font" do
   desc "SFMono patched with ligatures and Nerd Fonts glyphs"
   homepage "https://github.com/jacobcxdev/LigaSFMonoNerdFont"
 
-  font Dir["*.otf"]
+  font "*.otf"
 end
