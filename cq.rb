@@ -5,21 +5,21 @@
 class Cq < Formula
   desc "CLI tool to check AI provider quota usage"
   homepage "https://github.com/jacobcxdev/cq"
-  version "0.1.0"
+  version "0.2.0"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/jacobcxdev/cq/releases/download/v0.1.0/cq_0.1.0_darwin_amd64.tar.gz"
-      sha256 "beb2d22874649e1404ade59c62da0404f77597a1df6ed58be8f732ce2688daad"
+      url "https://github.com/jacobcxdev/cq/releases/download/v0.2.0/cq_0.2.0_darwin_amd64.tar.gz"
+      sha256 "45d80b02e528d8498816e363ed41a9731fe83ac87905ddcf58a38ede0f1a23d5"
 
       define_method(:install) do
         bin.install "cq"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/jacobcxdev/cq/releases/download/v0.1.0/cq_0.1.0_darwin_arm64.tar.gz"
-      sha256 "2f60acdcd8ea83ca629f26198b276eb31d3dfb451eac45017a4b796952954943"
+      url "https://github.com/jacobcxdev/cq/releases/download/v0.2.0/cq_0.2.0_darwin_arm64.tar.gz"
+      sha256 "8a4594fe6d5f8ecd437086188d068e76f19398995ec35fc1d33fb7eb6d772914"
 
       define_method(:install) do
         bin.install "cq"
@@ -29,15 +29,15 @@ class Cq < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/jacobcxdev/cq/releases/download/v0.1.0/cq_0.1.0_linux_amd64.tar.gz"
-      sha256 "1564c11a6db1780606e2ff0e6a1819df874c56c52d721a6cf5c5015b12f71522"
+      url "https://github.com/jacobcxdev/cq/releases/download/v0.2.0/cq_0.2.0_linux_amd64.tar.gz"
+      sha256 "1d048132eaec5f856cbbb419aa07cc3837f1bec66c8fb3cd525a26c06eb7160a"
       define_method(:install) do
         bin.install "cq"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/jacobcxdev/cq/releases/download/v0.1.0/cq_0.1.0_linux_arm64.tar.gz"
-      sha256 "53f16718b8a13784942600cae2b8d2c120816a343c38f02c05a04b00329e12c0"
+      url "https://github.com/jacobcxdev/cq/releases/download/v0.2.0/cq_0.2.0_linux_arm64.tar.gz"
+      sha256 "51ab98057d1ccdc62c4927ad60329a313616cdc4159677ff58ab45f7e1ac6f52"
       define_method(:install) do
         bin.install "cq"
       end
