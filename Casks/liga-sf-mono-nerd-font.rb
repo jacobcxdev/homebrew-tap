@@ -10,5 +10,16 @@ cask "liga-sf-mono-nerd-font" do
   desc "SFMono patched with ligatures and Nerd Fonts glyphs"
   homepage "https://github.com/jacobcxdev/LigaSFMonoNerdFont"
 
-  font "*.otf"
+    font "LigaSFMonoNerdFont-Bold.otf"
+    font "LigaSFMonoNerdFont-BoldItalic.otf"
+    font "LigaSFMonoNerdFont-Medium.otf"
+    font "LigaSFMonoNerdFont-SemiBold.otf"
+    font "LigaSFMonoNerdFont-Light.otf"
+    font "LigaSFMonoNerdFont-Heavy.otf"
+    font "LigaSFMonoNerdFont-HeavyItalic.otf"
+    font "LigaSFMonoNerdFont-LightItalic.otf"
+    font "LigaSFMonoNerdFont-MediumItalic.otf"
+    font "LigaSFMonoNerdFont-SemiBoldItalic.otf"
+    font "LigaSFMonoNerdFont-Italic.otf"
+    font "LigaSFMonoNerdFont-Regular.otf"
 end
