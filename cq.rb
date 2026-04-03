@@ -39,7 +39,7 @@ class Cq < Formula
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
       url "https://github.com/jacobcxdev/cq/releases/download/v0.7.0/cq_0.7.0_linux_arm64.tar.gz"
-      sha256 "8fc2643caf3ca71e4fbd6483457709eb3913a52638a8537bae4d4d8b87bfaf56"
+      sha256 "8fc2643caf3ca71e4fbd6483457709eb3913a52638a8537bae4d4b8b87bfaf56"
       define_method(:install) do
         bin.install "cq"
       end
@@ -47,7 +47,7 @@ class Cq < Formula
   end
 
   def post_install
-    system Formula["python@3"].opt_bin/"python3", "-m", "pip", "install", "--quiet", "headroom-ai[all]"
+    system Formula["python@3"].opt_bin/"python3", "-m", "pip", "install", "--break-system-packages", "--quiet", "headroom-ai[all]"
   end
 
   test do
