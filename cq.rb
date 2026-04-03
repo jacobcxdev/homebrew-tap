@@ -5,23 +5,23 @@
 class Cq < Formula
   desc "CLI tool to check AI provider quota usage"
   homepage "https://github.com/jacobcxdev/cq"
-  version "0.7.1"
+  version "0.7.2"
   license "MIT"
 
   depends_on "python@3"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/jacobcxdev/cq/releases/download/v0.7.1/cq_0.7.1_darwin_amd64.tar.gz"
-      sha256 "611084229276d0e46de821fc8d839251343cf654bdc1fa27ddb27ca5eb39ecc9"
+      url "https://github.com/jacobcxdev/cq/releases/download/v0.7.2/cq_0.7.2_darwin_amd64.tar.gz"
+      sha256 "524dbd8bdbbd5e63b69869d068bb9b8d9710689b916ef95e7f564bed8d255cb6"
 
       define_method(:install) do
         bin.install "cq"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/jacobcxdev/cq/releases/download/v0.7.1/cq_0.7.1_darwin_arm64.tar.gz"
-      sha256 "5dfcfe105a831698eeb8c4cf55adcc9454ea88b783055001eb7c27e2dcf4d32a"
+      url "https://github.com/jacobcxdev/cq/releases/download/v0.7.2/cq_0.7.2_darwin_arm64.tar.gz"
+      sha256 "9bc1c3bc78f8784d8b091d7a0350404290f574d558de4acc00569fd7a0ac4f6e"
 
       define_method(:install) do
         bin.install "cq"
@@ -31,15 +31,15 @@ class Cq < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/jacobcxdev/cq/releases/download/v0.7.1/cq_0.7.1_linux_amd64.tar.gz"
-      sha256 "f2f66c2680fdc20068e8c9e3f75263157aa7c239f324cd4049931d2846808c90"
+      url "https://github.com/jacobcxdev/cq/releases/download/v0.7.2/cq_0.7.2_linux_amd64.tar.gz"
+      sha256 "dee2f5d78a93a0a518383ad8139a66d449096dd85b29c6b24297e7f5630b5513"
       define_method(:install) do
         bin.install "cq"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/jacobcxdev/cq/releases/download/v0.7.1/cq_0.7.1_linux_arm64.tar.gz"
-      sha256 "bb1accc7ac2382ae6dcee96845bddf6f92befae5174913aa5c086211e36da1e3"
+      url "https://github.com/jacobcxdev/cq/releases/download/v0.7.2/cq_0.7.2_linux_arm64.tar.gz"
+      sha256 "38964663d8969ec488a358dbfbbd18e45af469a59181deb5185dd659d309b31e"
       define_method(:install) do
         bin.install "cq"
       end
