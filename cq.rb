@@ -5,23 +5,23 @@
 class Cq < Formula
   desc "CLI tool to check AI provider quota usage"
   homepage "https://github.com/jacobcxdev/cq"
-  version "0.7.4"
+  version "0.7.5"
   license "MIT"
 
   depends_on "python@3"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/jacobcxdev/cq/releases/download/v0.7.4/cq_0.7.4_darwin_amd64.tar.gz"
-      sha256 "935a93914005cbe12a8742ee9d924e64541b890cfa39f07c4e9f07d09d7c82e3"
+      url "https://github.com/jacobcxdev/cq/releases/download/v0.7.5/cq_0.7.5_darwin_amd64.tar.gz"
+      sha256 "8d63b77285568a6d11612a469e7a47d35b469bbd2586cc36a4ee43c10537ed63"
 
       define_method(:install) do
         bin.install "cq"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/jacobcxdev/cq/releases/download/v0.7.4/cq_0.7.4_darwin_arm64.tar.gz"
-      sha256 "6f8f6fa9ec307d513c608d6c3d73b0b702b795e824b61cc4c0850a2f344d2499"
+      url "https://github.com/jacobcxdev/cq/releases/download/v0.7.5/cq_0.7.5_darwin_arm64.tar.gz"
+      sha256 "acd462c495fdb67b9e8e95f31424cae95dee68cf5a2489abfd029a5a661e9bc6"
 
       define_method(:install) do
         bin.install "cq"
@@ -31,15 +31,15 @@ class Cq < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/jacobcxdev/cq/releases/download/v0.7.4/cq_0.7.4_linux_amd64.tar.gz"
-      sha256 "5952713f7d90f68551d1907c2c9b8aff9390aa62011cace4a5d4253fc3535c1b"
+      url "https://github.com/jacobcxdev/cq/releases/download/v0.7.5/cq_0.7.5_linux_amd64.tar.gz"
+      sha256 "399398ebd92724092fd8ad16e9ae09db1810010c9628655de3f84add9b676028"
       define_method(:install) do
         bin.install "cq"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/jacobcxdev/cq/releases/download/v0.7.4/cq_0.7.4_linux_arm64.tar.gz"
-      sha256 "f53df8bd067174c93c208f2eed9e3a38eaac4b4061795e5fc757c64f26d99678"
+      url "https://github.com/jacobcxdev/cq/releases/download/v0.7.5/cq_0.7.5_linux_arm64.tar.gz"
+      sha256 "c56f6dd2934667476e1f9ca674c2e1c5aeaa2c071fb7bc7f657fd3e4b9c8868b"
       define_method(:install) do
         bin.install "cq"
       end
@@ -48,6 +48,9 @@ class Cq < Formula
 
   def post_install
     system Formula["python@3"].opt_bin/"python3", "-m", "pip", "install", "--break-system-packages", "--quiet", "headroom-ai[all]"
+    if OS.mac?
+      system bin/"cq", "proxy", "install"
+    end
   end
 
   test do
