@@ -5,23 +5,23 @@
 class Cq < Formula
   desc "CLI tool to check AI provider quota usage"
   homepage "https://github.com/jacobcxdev/cq"
-  version "0.19.2"
+  version "0.19.3"
   license "MIT"
 
   depends_on "python@3"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/jacobcxdev/cq/releases/download/v0.19.2/cq_0.19.2_darwin_amd64.tar.gz"
-      sha256 "a3f43f2f413f37fc12d26d438034cc5e88ec297ea77b5522bd1c384252bc9bc2"
+      url "https://github.com/jacobcxdev/cq/releases/download/v0.19.3/cq_0.19.3_darwin_amd64.tar.gz"
+      sha256 "0b6a822f1cb89f6b50975ec0933c32a59c0e190d7888a888bb0048128886ae00"
 
       define_method(:install) do
         bin.install "cq"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/jacobcxdev/cq/releases/download/v0.19.2/cq_0.19.2_darwin_arm64.tar.gz"
-      sha256 "53cc1cdecd38ac7c8c7d2f1380b39fec5fb13b57bfbce9022cfcd9f804161f71"
+      url "https://github.com/jacobcxdev/cq/releases/download/v0.19.3/cq_0.19.3_darwin_arm64.tar.gz"
+      sha256 "f5197636b7f1d30fc3d330c8aeef3550534e4444524c62716a7d43e6452abd42"
 
       define_method(:install) do
         bin.install "cq"
@@ -31,15 +31,15 @@ class Cq < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/jacobcxdev/cq/releases/download/v0.19.2/cq_0.19.2_linux_amd64.tar.gz"
-      sha256 "f7745e2b10af8757dec5b0d09e61668d030cdafcdbfff6aaa262455d7ae932bb"
+      url "https://github.com/jacobcxdev/cq/releases/download/v0.19.3/cq_0.19.3_linux_amd64.tar.gz"
+      sha256 "938f81ce08871b2061fdf4d0662db8d6e35f4231283a75deaf02a977ff0f49d5"
       define_method(:install) do
         bin.install "cq"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/jacobcxdev/cq/releases/download/v0.19.2/cq_0.19.2_linux_arm64.tar.gz"
-      sha256 "6f7d972c235de354986fe23c3782714a8a066432f5ae5555f7d89fcadfded629"
+      url "https://github.com/jacobcxdev/cq/releases/download/v0.19.3/cq_0.19.3_linux_arm64.tar.gz"
+      sha256 "82df933267610624e762682d40c43f8a22a7bf25d43f5aeaa87ff621cafe3b5c"
       define_method(:install) do
         bin.install "cq"
       end
