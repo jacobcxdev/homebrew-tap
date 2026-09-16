@@ -36,47 +36,89 @@ cask "cq" do
 
   binary "cq"
 
-  postflight do
-    if OS.mac?
-      attributes = system_command "/usr/bin/xattr",
-                                  args:         ["#{HOMEBREW_PREFIX}/bin/cq"],
-                                  print_stdout: false
-      if attributes.stdout.lines(chomp: true).include?("com.apple.quarantine")
-        system_command "/usr/bin/xattr",
-                       args: ["-d", "com.apple.quarantine", "#{HOMEBREW_PREFIX}/bin/cq"]
-      end
-      remaining_attributes = system_command "/usr/bin/xattr",
-                                            args:         ["#{HOMEBREW_PREFIX}/bin/cq"],
-                                            print_stdout: false
-      if remaining_attributes.stdout.lines(chomp: true).include?("com.apple.quarantine")
-        raise "cq remains quarantined after installation"
-      end
+  postflight_steps do
+    on_macos do
+      run "/bin/sh",
+          args: [
+            "-c",
+            'if /usr/bin/xattr -p com.apple.quarantine "$1" >/dev/null 2>&1; then ' \
+            '/usr/bin/xattr -d com.apple.quarantine "$1"; fi && ' \
+            '! /usr/bin/xattr -p com.apple.quarantine "$1" >/dev/null 2>&1',
+            "cq-postflight",
+            "{{HOMEBREW_PREFIX}}/bin/cq",
+          ]
+      run "{{HOMEBREW_PREFIX}}/bin/cq",
+          args:           [
+            "service", "install", "--owner=homebrew",
+            "--service-executable={{HOMEBREW_PREFIX}}/bin/cq"
+          ],
+          writable_paths: [
+            ".config/cq",
+            "Library/Caches/cq",
+            "Library/LaunchAgents",
+            "Library/Logs/cq",
+          ],
+          writable_base:  :home
     end
-    system_command "#{HOMEBREW_PREFIX}/bin/cq",
-                   args: [
-                     "service", "install", "--owner=homebrew",
-                     "--service-executable=#{HOMEBREW_PREFIX}/bin/cq"
-                   ]
+    on_linux do
+      run "{{HOMEBREW_PREFIX}}/bin/cq",
+          args:           [
+            "service", "install", "--owner=homebrew",
+            "--service-executable={{HOMEBREW_PREFIX}}/bin/cq"
+          ],
+          writable_paths: [
+            ".cache/cq",
+            ".config/cq",
+            ".config/systemd/user",
+          ],
+          writable_base:  :home
+    end
   end
 
-  uninstall_preflight do
-    if File.executable?("#{HOMEBREW_PREFIX}/bin/cq")
-      system_command "#{HOMEBREW_PREFIX}/bin/cq",
-                     args: [
-                       "service", "uninstall", "--owner=homebrew",
-                       "--service-executable=#{HOMEBREW_PREFIX}/bin/cq"
-                     ]
+  uninstall_preflight_steps do
+    on_macos do
+      if_path_exists "{{HOMEBREW_PREFIX}}/bin/cq" do
+        run "{{HOMEBREW_PREFIX}}/bin/cq",
+            args:           [
+              "service", "uninstall", "--owner=homebrew",
+              "--service-executable={{HOMEBREW_PREFIX}}/bin/cq"
+            ],
+            writable_paths: [
+              ".config/cq",
+              "Library/Caches/cq",
+              "Library/LaunchAgents",
+              "Library/Logs/cq",
+            ],
+            writable_base:  :home
+      end
+      run "/bin/sh",
+          args:         ["-c", '/bin/launchctl bootout "gui/$(/usr/bin/id -u)/$1"', "cq-uninstall",
+                         "dev.jacobcx.cq.proxy"],
+          must_succeed: false
+      run "/bin/sh",
+          args:         ["-c", '/bin/launchctl bootout "gui/$(/usr/bin/id -u)/$1"', "cq-uninstall",
+                         "dev.jacobcx.cq.refresh"],
+          must_succeed: false
+      remove [
+        "Library/LaunchAgents/dev.jacobcx.cq.proxy.plist",
+        "Library/LaunchAgents/dev.jacobcx.cq.refresh.plist",
+      ], base: :home
     end
-    system_command "/bin/launchctl",
-                   args:         ["bootout", "gui/#{Process.uid}/dev.jacobcx.cq.proxy"],
-                   must_succeed: false
-    system_command "/bin/launchctl",
-                   args:         ["bootout", "gui/#{Process.uid}/dev.jacobcx.cq.refresh"],
-                   must_succeed: false
-    system_command "/bin/rm",
-                   args: ["-f", "#{Dir.home}/Library/LaunchAgents/dev.jacobcx.cq.proxy.plist"]
-    system_command "/bin/rm",
-                   args: ["-f", "#{Dir.home}/Library/LaunchAgents/dev.jacobcx.cq.refresh.plist"]
+    on_linux do
+      if_path_exists "{{HOMEBREW_PREFIX}}/bin/cq" do
+        run "{{HOMEBREW_PREFIX}}/bin/cq",
+            args:           [
+              "service", "uninstall", "--owner=homebrew",
+              "--service-executable={{HOMEBREW_PREFIX}}/bin/cq"
+            ],
+            writable_paths: [
+              ".cache/cq",
+              ".config/cq",
+              ".config/systemd/user",
+            ],
+            writable_base:  :home
+      end
+    end
   end
 
   # No zap stanza required
