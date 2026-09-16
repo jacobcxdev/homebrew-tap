@@ -5,8 +5,11 @@
 class Cq < Formula
   desc "CLI tool to check AI provider quota usage"
   homepage "https://github.com/jacobcxdev/cq"
-  version "0.27.0"
   license "MIT"
+
+  disable! date:             "2026-09-16",
+           because:          "is distributed as a cask",
+           replacement_cask: "cq"
 
   depends_on "python@3"
 
@@ -44,10 +47,6 @@ class Cq < Formula
         bin.install "cq"
       end
     end
-  end
-
-  def post_install
-    system Formula["python@3"].opt_bin/"python3", "-m", "pip", "install", "--break-system-packages", "--quiet", "headroom-ai[all]"
   end
 
   service do
