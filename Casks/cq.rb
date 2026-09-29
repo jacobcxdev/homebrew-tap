@@ -16,6 +16,24 @@ cask "cq" do
         echo "cq remains quarantined after installation" >&2
         exit 1
       fi
+      # An older uninstall hook may return before launchd finishes bootout.
+      quiet=0
+      for attempt in {1..300}; do
+        if ! /bin/launchctl print "gui/$UID/dev.jacobcx.cq.proxy" >/dev/null 2>&1 &&
+           ! /bin/launchctl print "gui/$UID/dev.jacobcx.cq.refresh" >/dev/null 2>&1; then
+          quiet=$((quiet + 1))
+          if [[ "$quiet" == 10 ]]; then
+            break
+          fi
+        else
+          quiet=0
+        fi
+        if [[ "$attempt" == 300 ]]; then
+          echo "CQ service remains registered after uninstall; upgrade cannot continue" >&2
+          exit 1
+        fi
+        sleep 0.1
+      done
       linked=0
       if [[ -e "$target" || -L "$target" ]]; then
         if [[ ! -L "$target" || ! "$target" -ef "$source" ]]; then
@@ -33,42 +51,46 @@ cask "cq" do
         exit 1
       fi
     elif [[ "$action" == uninstall ]]; then
+      uninstalled=0
       if [[ -x "$source" && "$target" -ef "$source" ]]; then
         "$source" service uninstall --owner=homebrew "--service-executable=$target"
+        uninstalled=1
       elif [[ -e "$target" || -L "$target" ]]; then
         if [[ ! -L "$target" || "$(readlink "$target")" != "$source" ]]; then
           echo "refusing to uninstall a different CQ executable: $target" >&2
           exit 1
         fi
       fi
-      /bin/launchctl bootout "gui/$UID/dev.jacobcx.cq.proxy" >/dev/null 2>&1 || true
-      /bin/launchctl bootout "gui/$UID/dev.jacobcx.cq.refresh" >/dev/null 2>&1 || true
-      /bin/rm -f "$HOME/Library/LaunchAgents/dev.jacobcx.cq.proxy.plist" \
-                 "$HOME/Library/LaunchAgents/dev.jacobcx.cq.refresh.plist"
+      if [[ "$uninstalled" == 0 ]]; then
+        /bin/launchctl bootout "gui/$UID/dev.jacobcx.cq.proxy" >/dev/null 2>&1 || true
+        /bin/launchctl bootout "gui/$UID/dev.jacobcx.cq.refresh" >/dev/null 2>&1 || true
+        /bin/rm -f "$HOME/Library/LaunchAgents/dev.jacobcx.cq.proxy.plist" \
+                   "$HOME/Library/LaunchAgents/dev.jacobcx.cq.refresh.plist"
+      fi
     else
       echo "unknown Homebrew lifecycle action: $action" >&2
       exit 64
     fi
   SH
-  version "0.33.8"
+  version "0.33.9"
 
   on_macos do
     on_arm do
-      sha256 "c750e755fcf8a5d3f827656f8a6639fb96e3bc6896c8f024a8740fe880138149"
+      sha256 "061ebcea1937da71c35c0e16be6324176610819bb2c2ff6bcdb35176b748b10b"
       url "https://github.com/jacobcxdev/cq/releases/download/v#{version}/cq_#{version}_darwin_arm64.tar.gz"
     end
     on_intel do
-      sha256 "d055263d06be104e82feaa3e9969b1e13a370562dcb51e689fa4940d7bbc6bf4"
+      sha256 "ff43cfab8f104736b3fc22ffa227598e9f7759be8ec97703bf53b19f717b5fdb"
       url "https://github.com/jacobcxdev/cq/releases/download/v#{version}/cq_#{version}_darwin_amd64.tar.gz"
     end
   end
   on_linux do
     on_arm do
-      sha256 "7cf44a7b56a1ccb8ea1972501806bb310e75e927cac6d57b90aac73720c19b1a"
+      sha256 "6f5016dae5d43731a75750a9cb5b61aedea241ba082bf25dd173d463abad4f99"
       url "https://github.com/jacobcxdev/cq/releases/download/v#{version}/cq_#{version}_linux_arm64.tar.gz"
     end
     on_intel do
-      sha256 "4667be7c98335b55d92d17c855dcf766b4d8aa677b452e846573eac135c905c2"
+      sha256 "d9901bfb192a5b60886900adb25baf0c5fc11be322e1e80b1f55ceb5c6f306a2"
       url "https://github.com/jacobcxdev/cq/releases/download/v#{version}/cq_#{version}_linux_amd64.tar.gz"
     end
   end
@@ -85,7 +107,7 @@ cask "cq" do
     executable: "/bin/bash",
     args:       [
       "-c", cq_lifecycle_script, "cq-homebrew-lifecycle", "install",
-      "#{HOMEBREW_CASKROOM}/#{token}/0.33.8/cq", "#{HOMEBREW_PREFIX}/bin/cq"
+      "#{HOMEBREW_CASKROOM}/#{token}/0.33.9/cq", "#{HOMEBREW_PREFIX}/bin/cq"
     ],
   }
   binary "cq"
@@ -94,7 +116,7 @@ cask "cq" do
     executable: "/bin/bash",
     args:       [
       "-c", cq_lifecycle_script, "cq-homebrew-lifecycle", "uninstall",
-      "#{HOMEBREW_CASKROOM}/#{token}/0.33.8/cq", "#{HOMEBREW_PREFIX}/bin/cq"
+      "#{HOMEBREW_CASKROOM}/#{token}/0.33.9/cq", "#{HOMEBREW_PREFIX}/bin/cq"
     ],
   }
 
