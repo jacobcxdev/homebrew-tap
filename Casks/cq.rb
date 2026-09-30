@@ -72,25 +72,25 @@ cask "cq" do
       exit 64
     fi
   SH
-  version "0.33.9"
+  version "0.33.10"
 
   on_macos do
     on_arm do
-      sha256 "061ebcea1937da71c35c0e16be6324176610819bb2c2ff6bcdb35176b748b10b"
+      sha256 "8b5fb8e154c6797b02b107353c74589c2b3a892733f61ded4307c587a0337adc"
       url "https://github.com/jacobcxdev/cq/releases/download/v#{version}/cq_#{version}_darwin_arm64.tar.gz"
     end
     on_intel do
-      sha256 "ff43cfab8f104736b3fc22ffa227598e9f7759be8ec97703bf53b19f717b5fdb"
+      sha256 "34cac9de489f35199d7fdb6a25278af6510136bdb0fdec6f108369409cef9c9d"
       url "https://github.com/jacobcxdev/cq/releases/download/v#{version}/cq_#{version}_darwin_amd64.tar.gz"
     end
   end
   on_linux do
     on_arm do
-      sha256 "6f5016dae5d43731a75750a9cb5b61aedea241ba082bf25dd173d463abad4f99"
+      sha256 "69f014315a18ba32986eb14e4de370322593b9df3e2c1e59aad81364ac4e6b38"
       url "https://github.com/jacobcxdev/cq/releases/download/v#{version}/cq_#{version}_linux_arm64.tar.gz"
     end
     on_intel do
-      sha256 "d9901bfb192a5b60886900adb25baf0c5fc11be322e1e80b1f55ceb5c6f306a2"
+      sha256 "7060e14b611a1145a81b6a4347ff22f830d3c25b4de6e69491f1cbf0f012f54c"
       url "https://github.com/jacobcxdev/cq/releases/download/v#{version}/cq_#{version}_linux_amd64.tar.gz"
     end
   end
@@ -107,7 +107,7 @@ cask "cq" do
     executable: "/bin/bash",
     args:       [
       "-c", cq_lifecycle_script, "cq-homebrew-lifecycle", "install",
-      "#{HOMEBREW_CASKROOM}/#{token}/0.33.9/cq", "#{HOMEBREW_PREFIX}/bin/cq"
+      "#{HOMEBREW_CASKROOM}/#{token}/0.33.10/cq", "#{HOMEBREW_PREFIX}/bin/cq"
     ],
   }
   binary "cq"
@@ -116,7 +116,7 @@ cask "cq" do
     executable: "/bin/bash",
     args:       [
       "-c", cq_lifecycle_script, "cq-homebrew-lifecycle", "uninstall",
-      "#{HOMEBREW_CASKROOM}/#{token}/0.33.9/cq", "#{HOMEBREW_PREFIX}/bin/cq"
+      "#{HOMEBREW_CASKROOM}/#{token}/0.33.10/cq", "#{HOMEBREW_PREFIX}/bin/cq"
     ],
   }
 
