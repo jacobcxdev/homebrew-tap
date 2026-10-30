@@ -43,13 +43,13 @@ cask "cq" do
       exit 64
     fi
   SH
-  version "0.40.0"
+  version "0.40.1"
 
   uninstall(script: {
     executable: "/bin/bash",
     args:       [
       "-c", cq_lifecycle_script, "cq-homebrew-lifecycle", "uninstall",
-      "#{HOMEBREW_CASKROOM}/#{token}/0.40.0/cq", "#{HOMEBREW_PREFIX}/bin/cq"
+      "#{HOMEBREW_CASKROOM}/#{token}/0.40.1/cq", "#{HOMEBREW_PREFIX}/bin/cq"
     ],
   }).tap do
     # Keep callback setup attached to its declaration through formatting.
@@ -93,21 +93,21 @@ cask "cq" do
 
   on_macos do
     on_arm do
-      sha256 "77bcc2de8cea015993060e2e1ad084df88e1f21ab018019ae87d1a0308156fea"
+      sha256 "ac1c94a2021777200c75430061c715ccf452ba2d583387593467c6a856d99b78"
       url "https://github.com/jacobcxdev/cq/releases/download/v#{version}/cq_#{version}_darwin_arm64.tar.gz"
     end
     on_intel do
-      sha256 "2379fbcb3e6b7e7b5e6c1f849928ead0870090c5e49c7a73be3b83734fe405ee"
+      sha256 "ef7588fefa63cad8e155bb7c0ba1b2f15725cf0f216f7cd6d61694c922ea1779"
       url "https://github.com/jacobcxdev/cq/releases/download/v#{version}/cq_#{version}_darwin_amd64.tar.gz"
     end
   end
   on_linux do
     on_arm do
-      sha256 "918770b61427e4057cb248585847b27d0cfa6a1addc1e2d57c5c44f2fa5444f3"
+      sha256 "59901605c3050bf03d51b512ef14ec756365d85a08e9558f10eb50cf33824b6c"
       url "https://github.com/jacobcxdev/cq/releases/download/v#{version}/cq_#{version}_linux_arm64.tar.gz"
     end
     on_intel do
-      sha256 "384147444f35dbd1ccefd90ddf559d5954f88135a713f0a78a0ff24ef19e3769"
+      sha256 "b421df2767cf97919b0e52fe19416faaa13f41937101f99ba4362c749c0ed30a"
       url "https://github.com/jacobcxdev/cq/releases/download/v#{version}/cq_#{version}_linux_amd64.tar.gz"
     end
   end
@@ -124,7 +124,7 @@ cask "cq" do
     executable: "/bin/bash",
     args:       [
       "-c", cq_lifecycle_script, "cq-homebrew-lifecycle", "install",
-      "#{HOMEBREW_CASKROOM}/#{token}/0.40.0/cq", "#{HOMEBREW_PREFIX}/bin/cq"
+      "#{HOMEBREW_CASKROOM}/#{token}/0.40.1/cq", "#{HOMEBREW_PREFIX}/bin/cq"
     ],
   }
   binary "cq"
