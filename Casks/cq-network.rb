@@ -2,7 +2,7 @@ cask "cq-network" do
   version "0.41.2"
   sha256 "9fb914e00c13abe4f9be506da27a68fcafed13ee835558781a525dea86f97fe7"
 
-  url "https://github.com/jacobcxdev/cq/releases/download/cq-network-v0.41.2/CQNetwork_0.41.2_universal.zip"
+  url "https://github.com/jacobcxdev/cq/releases/download/cq-network-v#{version}/CQNetwork_#{version}_universal.zip"
   name "CQ Network"
   desc "Native ChatGPT routing through CQ's configured WireGuard connection"
   homepage "https://github.com/jacobcxdev/cq"
