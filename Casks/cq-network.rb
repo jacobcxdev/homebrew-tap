@@ -1,6 +1,6 @@
 cask "cq-network" do
-  version "0.41.6"
-  sha256 "3d2b06ed7aa7bab4cd319678b66b7ee354f83024a87cc8c86254f8c7e9a73c1e"
+  version "0.41.7"
+  sha256 "caa96acb8812f9bc8f1ff2fb3b55e2567abd789c7981fc0ac6616cf9b4aedc80"
 
   url "https://github.com/jacobcxdev/cq/releases/download/cq-network-v#{version}/CQNetwork_#{version}_universal.zip"
   name "CQ Network"
