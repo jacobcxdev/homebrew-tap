@@ -55,6 +55,7 @@ cask "cq" do
       "#{HOMEBREW_CASKROOM}/#{token}/0.47.9/cq", "#{HOMEBREW_PREFIX}/bin/cq"
     ],
   }).tap do
+    cask = self.cask
     # Keep callback setup attached to its declaration through formatting.
     # Saved Ruby metadata retains this instance-scoped compatibility bridge.
     if cask.method(:uninstall_flight_blocks?).arity != 0
