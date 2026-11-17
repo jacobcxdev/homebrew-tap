@@ -1,9 +1,9 @@
 cask "cq-network" do
   arch arm: "arm64", intel: "amd64"
 
-  version "0.49.6"
-  sha256 arm:   "9ad538f70f5226eb6bb039a694a2645c1313ee10accf8fcb72c2b1e9b6236aad",
-         intel: "915afc2656b6e4388cd11314d60247468594256083e169ccc500b6268964cea3"
+  version "0.49.7"
+  sha256 arm:   "92a6568e8a3afbf0fadbb5539970c92e71dcfdad4706f89431446d011d3b2d02",
+         intel: "4a93600e6b6cce61618cba5a2c126b76aa6eb7cee5e608cc81f463ac07426248"
 
   url "https://github.com/jacobcxdev/cq/releases/download/v#{version}/cq_#{version}_darwin_#{arch}_bundle.tar.gz"
   name "CQ Network"
