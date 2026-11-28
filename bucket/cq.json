@@ -1,16 +1,16 @@
 {
-  "version": "0.53.6",
+  "version": "0.54.0",
   "description": "CLI tool to check AI provider quota usage",
   "homepage": "https://github.com/jacobcxdev/cq",
   "license": "MIT",
   "architecture": {
     "64bit": {
-      "url": "https://github.com/jacobcxdev/cq/releases/download/v0.53.6/cq_0.53.6_windows_amd64.zip",
-      "hash": "2a6785ca10f7a18f128465859d8d345346539b043d3234f9f6128ff32d040a28"
+      "url": "https://github.com/jacobcxdev/cq/releases/download/v0.54.0/cq_0.54.0_windows_amd64.zip",
+      "hash": "50b2e91759136103b5332442458ae20078cd26594ef7e62aba72564269b243a0"
     },
     "arm64": {
-      "url": "https://github.com/jacobcxdev/cq/releases/download/v0.53.6/cq_0.53.6_windows_arm64.zip",
-      "hash": "f3d7f5c4befab1af831b3fa99f5f3f672caa2fe818589ebdd05a5bb9eabea204"
+      "url": "https://github.com/jacobcxdev/cq/releases/download/v0.54.0/cq_0.54.0_windows_arm64.zip",
+      "hash": "15fefe0074e62a452a03be0638605d4bd401e7a3fe73c4d96f7c0430d8dc3957"
     }
   },
   "bin": "cq.exe"
